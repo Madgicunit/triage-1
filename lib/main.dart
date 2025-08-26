@@ -211,120 +211,47 @@ class AddItemPage extends StatefulWidget {
   const AddItemPage({super.key});
 
   @override
-  AddItemPageState createState() => AddItemPageState();
+  // ignore: library_private_types_in_public_api
+  _AddItemPageState createState() => _AddItemPageState();
 }
 
-class AddItemPageState extends State<AddItemPage> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nomController = TextEditingController();
-  final TextEditingController _categorieController = TextEditingController();
-  bool _estApprouve = false;
+class _AddItemPageState extends State<AddItemPage> {
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Suggérer un article')),
-      body: Center(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: 500, minWidth: 350),
-          padding: const EdgeInsets.symmetric(vertical: 32.0),
-          child: Material(
-            elevation: 2,
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Proposez un nouvel article à ajouter et indiquez la catégorie correspondante. "
-                      "Si un gérant l'a déjà approuvé, cochez la case ci-dessous.",
-                      style: TextStyle(fontSize: 16, color: Colors.blue[800]),
-                    ),
-                    SizedBox(height: 24),
-                    TextFormField(
-                      controller: _nomController,
-                      decoration: InputDecoration(
-                        labelText: 'Nom de l’article',
-                        prefixIcon: Icon(Icons.article),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Ce champ est obligatoire';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 16),
-                    TextFormField(
-                      controller: _categorieController,
-                      decoration: InputDecoration(
-                        labelText: 'Catégorie proposée',
-                        prefixIcon: Icon(Icons.category),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Ce champ est obligatoire';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 16),
-                    SwitchListTile(
-                      title: Text('Approuvé par le gérant'),
-                      value: _estApprouve,
-                      onChanged: (value) {
-                        setState(() => _estApprouve = value);
-                      },
-                    ),
-                    SizedBox(height: 24),
-                    Center(
-                      child: ElevatedButton.icon(
-                        icon: Icon(Icons.send),
-                        label: Text('Suggérer'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue[700],
-                          foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            final nom = _nomController.text;
-                            final categorie = _categorieController.text;
-                            final approuve = _estApprouve;
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Suggestion envoyée : $nom ($categorie)'
-                                  '${approuve ? ' [Approuvé]' : ''}',
-                                ),
-                              ),
-                            );
-
-                            _formKey.currentState!.reset();
-                            _nomController.clear();
-                            _categorieController.clear();
-                            setState(() => _estApprouve = false);
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+      appBar: AppBar(title: Text('Ajouter un objet')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(
+                labelText: 'Nom de l\'objet',
+                border: OutlineInputBorder(),
               ),
             ),
-          ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                final name = nameController.text.trim();
+                if (name.isNotEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Objet "$name" ajouté !')),
+                  );
+                  Navigator.pop(context);
+                }
+              },
+              child: Text('Ajouter'),
+            ),
+          ],
         ),
       ),
     );
   }
 }
-
 
 class DirectivesPage extends StatelessWidget {
   const DirectivesPage({super.key});
