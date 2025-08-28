@@ -1222,7 +1222,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                 ),
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Rechercher un item',
+                  // ignore: prefer_single_quotes
+                  labelText: "Rechercher un item",
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.search),
                 ),
@@ -1237,7 +1238,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
               else
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text('Aucun item trouvé.', style: TextStyle(fontSize: 15, color: Colors.grey)),
+                  // ignore: prefer_single_quotes
+                  child: Text("""Aucun item trouvé.""", style: TextStyle(fontSize: 15, color: Colors.grey)),
                 ),
               SizedBox(height: 16),
               if (showBin)

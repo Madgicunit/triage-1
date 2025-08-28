@@ -34,6 +34,7 @@ class AddItemPageState extends State<AddItemPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
+                      // ignore: prefer_single_quotes
                       "Proposez un nouvel article à ajouter et indiquez la catégorie correspondante. "
                       "Si un gérant l'a déjà approuvé, cochez la case ci-dessous.",
                       style: TextStyle(fontSize: 16, color: Colors.blue[800]),

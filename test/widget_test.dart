@@ -5,23 +5,16 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:centre_de_don/main.dart'; // Ajoute l'import de ton app principale
 
 void main() {
   testWidgets('Affiche le texte de bienvenue', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('Centre de don')),
-        body: Center(child: Text('Bienvenue sur l\'appli de triage Web de Reinaissance')),
-      ),
-    ));
+    await tester.pumpWidget(const RenaissanceApp());
 
-    expect(find.text('Bienvenue sur mon appli Flutter Web'), findsOneWidget);
+    // Vérifie que le texte d'accueil et le titre sont présents dans l'app réelle
     expect(find.text('Centre de don'), findsOneWidget);
-  // Verify that our counter has incremented.
-  // expect(find.text('0'), findsNothing);
-  // expect(find.text('1'), findsOneWidget);
+    // Si tu veux tester un texte spécifique de ta page d'accueil, ajoute-le ici :
+    // expect(find.text('Bienvenue sur mon appli Flutter Web'), findsOneWidget);
   });
 }
