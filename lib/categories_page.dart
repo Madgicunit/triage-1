@@ -1232,12 +1232,12 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
               if (filteredItems.isNotEmpty)
                 ...filteredItems.map((item) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 2.0),
-                  child: Text("- $item", style: TextStyle(fontSize: 15)),
+                  child: Text('- $item', style: TextStyle(fontSize: 15)),
                 ))
               else
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text("Aucun item trouvé.", style: TextStyle(fontSize: 15, color: Colors.grey)),
+                  child: Text('Aucun item trouvé.', style: TextStyle(fontSize: 15, color: Colors.grey)),
                 ),
               SizedBox(height: 16),
               if (showBin)
